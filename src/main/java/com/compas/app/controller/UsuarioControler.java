@@ -18,18 +18,34 @@ public class UsuarioControler {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/usuarios")
     public ArrayList<Usuario> getUsuario(){
         return usuarioService.getUsers();
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/addUsuario")
     public Usuario registerNewUsuario(@RequestBody Usuario usuario){
         return usuarioService.addNewUsuario(usuario);
     }
 
-    @DeleteMapping(path = "/user/{id_usuario}")
+    @DeleteMapping(path = "/usuario/{id_usuario}")
     public void deleteUsuario(@PathVariable("id_usuario") Long id_usuario){
         usuarioService.deleteUsuario(id_usuario);
+    }
+
+    @PutMapping(path = "/usuario/{id_usuario}")
+    public void updateUsuario(@PathVariable("id_usuario") Long id_usuario,
+                              @RequestParam(required = false) String nombre,
+                              @RequestParam(required = false) String apellidos,
+                              @RequestParam(required = false) Integer edad,
+                              @RequestParam(required = false) String email,
+                              @RequestParam(required = false) String password,
+                              @RequestParam(required = false) String genero,
+                              @RequestParam(required = false) Integer codigoPostal,
+                              @RequestParam(required = false) String estado,
+                              @RequestParam(required = false) String ciudad,
+                              @RequestParam(required = false) String foto_perfil,
+                              @RequestParam(required = false) String foto_portada){
+        usuarioService.updateUsuario(id_usuario,nombre, apellidos, edad, email, password, genero, codigoPostal, estado, ciudad, foto_perfil, foto_portada);
     }
 }
