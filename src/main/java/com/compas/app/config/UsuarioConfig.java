@@ -25,8 +25,8 @@ public class UsuarioConfig {
                     "Querétaro",
                     "Querétaro",
                     "",
-                    "",
-                    LocalDate.now()
+                    ""
+                    //LocalDate.now()
             );
         repository.saveAll(List.of(patricio));
         };

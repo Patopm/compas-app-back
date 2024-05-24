@@ -48,17 +48,17 @@ public class Usuario {
     @Column(name = "foto_portada")
     private String foto_portada;
 
-    @Column(name = "created_at")
+    /*@Column(name = "created_at")
     private LocalDate created_at;
 
     @Transient
-    private LocalDate updated_at;
+    private LocalDate updated_at;*/
 
 
     public Usuario() {
     }
 
-    public Usuario(Long id, String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada, LocalDate created_at) {
+    public Usuario(Long id, String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada){//, LocalDate created_at) {
         this.id_usuario = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -71,10 +71,10 @@ public class Usuario {
         this.ciudad = ciudad;
         this.foto_perfil = foto_perfil;
         this.foto_portada = foto_portada;
-        this.created_at = created_at;
+        /*this.created_at = created_at;*/
     }
 
-    public Usuario(String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada, LocalDate created_at) {
+    public Usuario(String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada){ //, LocalDate created_at) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
@@ -86,7 +86,7 @@ public class Usuario {
         this.ciudad = ciudad;
         this.foto_perfil = foto_perfil;
         this.foto_portada = foto_portada;
-        this.created_at = created_at;
+        // this.created_at = created_at;
     }
 
     public Long getId() {
@@ -185,7 +185,7 @@ public class Usuario {
         this.foto_portada = foto_portada;
     }
 
-    public LocalDate getCreated_at() {
+    /*public LocalDate getCreated_at() {
         return created_at;
     }
 
@@ -199,7 +199,7 @@ public class Usuario {
 
     public void setUpdated_at(LocalDate updated_at) {
         this.updated_at = updated_at;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -216,8 +216,8 @@ public class Usuario {
                 ", ciudad='" + ciudad + '\'' +
                 ", foto_perfil='" + foto_perfil + '\'' +
                 ", foto_portada='" + foto_portada + '\'' +
-                ", created_at=" + created_at +
-                ", updated_at=" + updated_at +
+                /*", created_at=" + created_at +
+                ", updated_at=" + updated_at +*/
                 '}';
     }
 }
