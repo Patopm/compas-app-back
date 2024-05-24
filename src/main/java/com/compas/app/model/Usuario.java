@@ -48,7 +48,7 @@ public class Usuario {
     @Column(name = "foto_portada")
     private String foto_portada;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDate created_at;
 
     @Transient
