@@ -5,7 +5,9 @@ import com.compas.app.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -18,8 +20,8 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public ArrayList<Usuario> getUsers(){
-        return (ArrayList<Usuario>) usuarioRepository.findAll();
+    public List<Usuario> getAllUsers(){
+        return usuarioRepository.findAll();
     }
 
 
@@ -28,12 +30,14 @@ public class UsuarioService {
         if(usuarioOptional.isPresent()){
             throw new IllegalStateException("email taken");
         }
+        usuario.setCreated_at(LocalDate.now());
+        usuario.setUpdated_at(LocalDate.now());
         usuarioRepository.save(usuario);
         return usuario;
     }
 
     public void deleteUsuario(Long id_usuario) {
-        boolean exists =usuarioRepository.existsById(id_usuario);
+        boolean exists = usuarioRepository.existsById(id_usuario);
         if (!exists){
             throw new IllegalStateException("usuario with id" + id_usuario + " does not exist");
         }
