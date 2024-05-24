@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1")
@@ -19,8 +20,8 @@ public class UsuarioControler {
     }
 
     @GetMapping("/usuarios")
-    public ArrayList<Usuario> getUsuario(){
-        return usuarioService.getUsers();
+    public List<Usuario> getUsuario(){
+        return usuarioService.getAllUsers();
     }
 
     @PostMapping("/addUsuario")
