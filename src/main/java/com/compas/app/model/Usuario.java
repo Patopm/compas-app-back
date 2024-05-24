@@ -12,7 +12,7 @@ import java.time.Period;
 public class Usuario {
     @Id
     @Column(name = "id_usuario")
-    @GeneratedValue()
+    @GeneratedValue
     private Long id_usuario;
 
     @Column(name = "nombre")
@@ -48,7 +48,7 @@ public class Usuario {
     @Column(name = "foto_portada")
     private String foto_portada;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDate created_at;
 
     @Transient

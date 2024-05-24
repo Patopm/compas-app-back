@@ -23,9 +23,9 @@ public class UsuarioControler {
         return usuarioService.getUsers();
     }
 
-    @PostMapping
-    public void registerNewUsuario(@RequestBody Usuario usuario){
-        usuarioService.addNewUsuario(usuario);
+    @PostMapping(path = "/addUser")
+    public Usuario registerNewUsuario(@RequestBody Usuario usuario){
+        return usuarioService.addNewUsuario(usuario);
     }
 
     @DeleteMapping(path = "{id_usuario}")
