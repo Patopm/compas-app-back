@@ -26,9 +26,10 @@ public class UsuarioConfig {
                     "Querétaro",
                     "",
                     "",
+                    LocalDate.now(),
                     LocalDate.now()
             );
-        repository.saveAll(List.of(patricio));
+        //repository.saveAll(List.of(patricio));
         };
     }
 }

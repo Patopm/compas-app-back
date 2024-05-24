@@ -5,41 +5,41 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Objects;
 
 @Entity
-@Data
 @Table(name = "Usuarios")
 public class Usuario {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    @GeneratedValue
     private Long id_usuario;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "apellidos")
+    @Column(name = "apellidos", nullable = false)
     private String apellidos;
 
-    @Column(name = "edad")
+    @Column(name = "edad", nullable = false)
     private Integer edad;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "contraseña")
+    @Column(name = "contraseña", nullable = false)
     private String password;
 
-    @Column(name = "genero")
+    @Column(name = "genero", nullable = false)
     private String genero;
 
-    @Column(name = "codigo_postal")
+    @Column(name = "codigo_postal", nullable = false)
     private Integer codigoPostal;
 
-    @Column(name = "estado")
+    @Column(name = "estado", nullable = false)
     private String estado;
 
-    @Column(name = "ciudad")
+    @Column(name = "ciudad", nullable = false)
     private String ciudad;
 
     @Column(name = "foto_perfil")
@@ -51,15 +51,15 @@ public class Usuario {
     @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDate created_at;
 
-    @Transient
+    @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDate updated_at;
 
 
     public Usuario() {
     }
 
-    public Usuario(Long id, String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada, LocalDate created_at) {
-        this.id_usuario = id;
+    public Usuario(Long id_usuario, String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada, LocalDate created_at, LocalDate updated_at) {
+        this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
@@ -72,9 +72,10 @@ public class Usuario {
         this.foto_perfil = foto_perfil;
         this.foto_portada = foto_portada;
         this.created_at = created_at;
+        this.updated_at = updated_at;
     }
 
-    public Usuario(String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada, LocalDate created_at) {
+    public Usuario(String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada, LocalDate created_at, LocalDate updated_at) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
@@ -87,14 +88,15 @@ public class Usuario {
         this.foto_perfil = foto_perfil;
         this.foto_portada = foto_portada;
         this.created_at = created_at;
+        this.updated_at = updated_at;
     }
 
-    public Long getId() {
+    public Long getId_usuario() {
         return id_usuario;
     }
 
-    public void setId(Long id) {
-        this.id_usuario = id;
+    public void setId_usuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNombre() {
@@ -193,8 +195,8 @@ public class Usuario {
         this.created_at = created_at;
     }
 
-    public Period getUpdated_at() {
-        return Period.between(this.created_at, LocalDate.now());
+    public LocalDate getUpdated_at() {
+        return updated_at;
     }
 
     public void setUpdated_at(LocalDate updated_at) {
@@ -202,9 +204,22 @@ public class Usuario {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id_usuario, usuario.id_usuario) && Objects.equals(nombre, usuario.nombre) && Objects.equals(apellidos, usuario.apellidos) && Objects.equals(edad, usuario.edad) && Objects.equals(email, usuario.email) && Objects.equals(password, usuario.password) && Objects.equals(genero, usuario.genero) && Objects.equals(codigoPostal, usuario.codigoPostal) && Objects.equals(estado, usuario.estado) && Objects.equals(ciudad, usuario.ciudad) && Objects.equals(foto_perfil, usuario.foto_perfil) && Objects.equals(foto_portada, usuario.foto_portada) && Objects.equals(created_at, usuario.created_at) && Objects.equals(updated_at, usuario.updated_at);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_usuario, nombre, apellidos, edad, email, password, genero, codigoPostal, estado, ciudad, foto_perfil, foto_portada, created_at, updated_at);
+    }
+
+    @Override
     public String toString() {
-        return "User{" +
-                "id=" + id_usuario +
+        return "Usuario{" +
+                "id_usuario=" + id_usuario +
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", edad=" + edad +

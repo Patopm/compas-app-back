@@ -23,7 +23,7 @@ public class UsuarioControler {
         return usuarioService.getUsers();
     }
 
-    @PostMapping(path = "/addUser")
+    @PostMapping("/addUser")
     public Usuario registerNewUsuario(@RequestBody Usuario usuario){
         return usuarioService.addNewUsuario(usuario);
     }
