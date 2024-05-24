@@ -12,7 +12,7 @@ import java.time.Period;
 public class Usuario {
     @Id
     @Column(name = "id_usuario")
-    @GeneratedValue()
+    @GeneratedValue
     private Long id_usuario;
 
     @Column(name = "nombre")

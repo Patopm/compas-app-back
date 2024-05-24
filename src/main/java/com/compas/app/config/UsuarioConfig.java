@@ -18,7 +18,7 @@ public class UsuarioConfig {
                     "Patricio",
                     "Piña",
                     18,
-                    "egs.pato.pm@gmail.com",
+                    "patricio.pina@gmail.com",
                     "Pato123#",
                     "Masculino",
                     76177,

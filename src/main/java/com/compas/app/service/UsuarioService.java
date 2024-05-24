@@ -21,12 +21,13 @@ public class UsuarioService {
     }
 
 
-    public void addNewUsuario(Usuario usuario) {
+    public Usuario addNewUsuario(Usuario usuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
         if(usuarioOptional.isPresent()){
             throw new IllegalStateException("email taken");
         }
         usuarioRepository.save(usuario);
+        return usuario;
     }
 
     public void deleteUsuario(Long id_usuario) {
