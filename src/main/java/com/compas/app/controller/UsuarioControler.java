@@ -23,12 +23,12 @@ public class UsuarioControler {
         return usuarioService.getUsers();
     }
 
-    @PostMapping(path = "/addUser")
+    @PostMapping("/addUser")
     public Usuario registerNewUsuario(@RequestBody Usuario usuario){
         return usuarioService.addNewUsuario(usuario);
     }
 
-    @DeleteMapping(path = "{id_usuario}")
+    @DeleteMapping(path = "/user/{id_usuario}")
     public void deleteUsuario(@PathVariable("id_usuario") Long id_usuario){
         usuarioService.deleteUsuario(id_usuario);
     }
