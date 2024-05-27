@@ -24,6 +24,11 @@ public class UsuarioController {
         return usuarioService.getAllUsers();
     }
 
+    @GetMapping("/{id}")
+    public Usuario getUsuarioById(@PathVariable(name = "id") Long id){
+        return usuarioService.getUsuarioById(id);
+    }
+
     @PostMapping("/addUsuario")
     public void registerNewUsuario(@RequestBody Usuario usuario){
         usuario.setCreated_at(LocalDate.now());
@@ -32,13 +37,13 @@ public class UsuarioController {
     }
 
     @DeleteMapping(path = "/{id_usuario}")
-    public void deleteUsuario(@PathVariable("id_usuario") Long id_usuario){
+    public void deleteUsuario(@PathVariable(name = "id_usuario") Long id_usuario){
         usuarioService.deleteUsuario(id_usuario);
     }
 
     @PutMapping(path = "/{id_usuario}")
     public void updateUsuario(@PathVariable("id_usuario") Long id_usuario,
                               @RequestBody Usuario usuario){
-        usuarioService.updateUsuario(id_usuario, usuario.getNombre(), usuario.getApellidos(), usuario.getEdad(), usuario.getEmail(), usuario.getPassword(), usuario.getGenero(), usuario.getCodigoPostal(), usuario.getEstado(), usuario.getCiudad(), usuario.getFoto_perfil(), usuario.getFoto_portada());
+        usuarioService.updateUsuario(id_usuario, usuario);
     }
 }
