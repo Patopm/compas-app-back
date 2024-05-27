@@ -3,16 +3,17 @@ package com.compas.app.service;
 import com.compas.app.model.Artistas;
 import com.compas.app.repository.ArtistasRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class ArtistasService {
     private final ArtistasRepository artistasRepository;
 
+    @Autowired
     public ArtistasService(ArtistasRepository artistasRepository) {
         this.artistasRepository = artistasRepository;
     }

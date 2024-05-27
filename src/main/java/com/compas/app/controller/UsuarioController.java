@@ -38,7 +38,7 @@ public class UsuarioController {
 
     @PutMapping(path = "/{id_usuario}")
     public void updateUsuario(@PathVariable("id_usuario") Long id_usuario,
-                              @RequestBody(required = false) Usuario usuario){
-        usuarioService.updateUsuario(id_usuario,usuario.getNombre(), usuario.getApellidos(), usuario.getEdad(), usuario.getEmail(), usuario.getPassword(), usuario.getGenero(), usuario.getCodigoPostal(), usuario.getEstado(), usuario.getCiudad(), usuario.getFoto_perfil(), usuario.getFoto_portada());
+                              @RequestBody Usuario usuario){
+        usuarioService.updateUsuario(id_usuario, usuario.getNombre(), usuario.getApellidos(), usuario.getEdad(), usuario.getEmail(), usuario.getPassword(), usuario.getGenero(), usuario.getCodigoPostal(), usuario.getEstado(), usuario.getCiudad(), usuario.getFoto_perfil(), usuario.getFoto_portada());
     }
 }
