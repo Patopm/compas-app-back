@@ -1,10 +1,8 @@
 package com.compas.app.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.Objects;
 
 @Entity
@@ -53,6 +51,9 @@ public class Usuario {
 
     @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDate updated_at;
+
+    @OneToOne
+    private Artistas artistas;
 
 
     public Usuario() {
