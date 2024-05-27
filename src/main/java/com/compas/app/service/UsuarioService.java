@@ -1,5 +1,6 @@
 package com.compas.app.service;
 
+import com.compas.app.exceptions.UsuarioNotFoundException;
 import com.compas.app.model.Usuario;
 import com.compas.app.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -24,6 +25,10 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
+    public Usuario getUsuarioById(Long id){
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNotFoundException(id));
+    }
 
     public void addNewUsuario(Usuario usuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
@@ -36,59 +41,47 @@ public class UsuarioService {
     public void deleteUsuario(Long id_usuario) {
         boolean exists = usuarioRepository.existsById(id_usuario);
         if (!exists){
-            throw new IllegalStateException("usuario with id" + id_usuario + " does not exist");
+            throw new UsuarioNotFoundException(id_usuario);
         }
         usuarioRepository.deleteById(id_usuario);
     }
 
     @Transactional
-    public void updateUsuario(Long idUsuario,
-                              String nombre,
-                              String apellidos,
-                              Integer edad,
-                              String email,
-                              String password,
-                              String genero,
-                              Integer codigoPostal,
-                              String estado,
-                              String ciudad,
-                              String fotoPerfil,
-                              String fotoPortada) {
+    public void updateUsuario(Long idUsuario, Usuario updateUsuario) {
         Usuario usuario = usuarioRepository.findById(idUsuario)
-                .orElseThrow(() -> new IllegalStateException("user with id " + idUsuario + " does not exist"));
-        if (nombre != null && nombre.length() > 0 && !Objects.equals(usuario.getNombre(), nombre)){
-            usuario.setNombre(nombre);
+                .orElseThrow(() -> new UsuarioNotFoundException(idUsuario));
+        if (updateUsuario.getNombre() != null && updateUsuario.getNombre().length() > 0 && !Objects.equals(usuario.getNombre(), updateUsuario.getNombre())){
+            usuario.setNombre(updateUsuario.getNombre());
         }
-        if (apellidos != null && apellidos.length() > 0 && !Objects.equals(usuario.getApellidos(), apellidos)){
-            usuario.setApellidos(apellidos);
+        if (updateUsuario.getApellidos() != null && updateUsuario.getApellidos().length() > 0 && !Objects.equals(usuario.getApellidos(), updateUsuario.getApellidos())){
+            usuario.setApellidos(updateUsuario.getApellidos());
         }
-        if (edad != null && edad > 18 && !Objects.equals(usuario.getEdad(), edad)){
-            usuario.setEdad(edad);
+        if (updateUsuario.getEdad() != null && updateUsuario.getEdad() > 18 && !Objects.equals(usuario.getEdad(), updateUsuario.getEdad())){
+            usuario.setEdad(updateUsuario.getEdad());
         }
-        if (email != null && email.length() > 0 && !Objects.equals(usuario.getEmail(), email)){
-            usuario.setEmail(email);
+        if (updateUsuario.getEmail() != null && updateUsuario.getEmail().length() > 0 && !Objects.equals(usuario.getEmail(), updateUsuario.getEmail())){
+            usuario.setEmail(updateUsuario.getEmail());
         }
-        if (password != null && password.length() > 0 && !Objects.equals(usuario.getPassword(), password)){
-            usuario.setPassword(password);
+        if (updateUsuario.getPassword() != null && updateUsuario.getPassword().length() > 0 && !Objects.equals(usuario.getPassword(), updateUsuario.getPassword())){
+            usuario.setPassword(updateUsuario.getPassword());
         }
-        if (genero != null && genero.length() > 0 && !Objects.equals(usuario.getGenero(), genero)){
-            usuario.setGenero(genero);
+        if (updateUsuario.getGenero() != null && updateUsuario.getGenero().length() > 0 && !Objects.equals(usuario.getGenero(), updateUsuario.getGenero())){
+            usuario.setGenero(updateUsuario.getGenero());
         }
-        if (codigoPostal != null && codigoPostal >= 1000 && codigoPostal <= 99000 && !Objects.equals(usuario.getCodigoPostal(), codigoPostal)){
-            usuario.setCodigoPostal(codigoPostal);
+        if (updateUsuario.getCodigoPostal() != null && updateUsuario.getCodigoPostal() >= 1000 && updateUsuario.getCodigoPostal() <= 99000 && !Objects.equals(usuario.getCodigoPostal(), updateUsuario.getCodigoPostal())){
+            usuario.setCodigoPostal(updateUsuario.getCodigoPostal());
         }
-        if (estado != null && estado.length() > 0 && !Objects.equals(usuario.getEstado(), estado)){
-            usuario.setEstado(estado);
+        if (updateUsuario.getEstado() != null && updateUsuario.getEstado().length() > 0 && !Objects.equals(usuario.getEstado(), updateUsuario.getEstado())){
+            usuario.setEstado(updateUsuario.getEstado());
         }
-        if (ciudad != null && ciudad.length() > 0 && !Objects.equals(usuario.getCiudad(), ciudad)){
-            usuario.setCiudad(ciudad);
+        if (updateUsuario.getCiudad() != null && updateUsuario.getCiudad().length() > 0 && !Objects.equals(usuario.getCiudad(), updateUsuario.getCiudad())){
+            usuario.setCiudad(updateUsuario.getCiudad());
         }
-        if (fotoPerfil != null && fotoPerfil.length() > 0 && !Objects.equals(usuario.getFoto_perfil(), fotoPerfil)){
-            usuario.setFoto_perfil(fotoPerfil);
+        if (updateUsuario.getFoto_perfil() != null && updateUsuario.getFoto_perfil().length() > 0 && !Objects.equals(usuario.getFoto_perfil(), updateUsuario.getFoto_perfil())){
+            usuario.setFoto_perfil(updateUsuario.getFoto_perfil());
         }
-        if (fotoPortada != null && fotoPortada.length() > 0 && !Objects.equals(usuario.getFoto_portada(), fotoPortada)){
-            usuario.setFoto_portada(fotoPortada);
+        if (updateUsuario.getFoto_portada() != null && updateUsuario.getFoto_portada().length() > 0 && !Objects.equals(usuario.getFoto_portada(), updateUsuario.getFoto_portada())){
+            usuario.setFoto_portada(updateUsuario.getFoto_portada());
         }
-
     }
 }
