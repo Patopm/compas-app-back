@@ -34,9 +34,10 @@ public class ArtistasController {
     public void deleteArtista(@PathVariable("id_artista") Long id_artista){
         artistasService.deleteArtista(id_artista);
     }
-    //@PutMapping(path = "{id_artista}")
-    //public void updateArtista(@PathVariable("id_artista") Long id_artista,
-    //                          @RequestBody(required = false) String acerca_de){
-    //    artistasService.updateArtista(id_artista, acerca_de);
-    //}
+
+    @PutMapping(path = "/{id_artista}")
+    public void updateArtista(@PathVariable("id_artista") Long id_artista,
+                              @RequestBody(required = false) Artistas acerca_de){
+        artistasService.updateArtista(id_artista, acerca_de.getAcerca_de());
+    }
 }

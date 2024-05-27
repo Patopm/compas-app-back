@@ -32,19 +32,19 @@ public class Artistas {
     public Artistas() {
     }
 
-    public Artistas(String acerca_de, LocalDate created_at, LocalDate updated_at){ //, Long usuario_id) {
+    public Artistas(String acerca_de, LocalDate created_at, LocalDate updated_at, Usuario id_usuario) {
         this.acerca_de = acerca_de;
         this.created_at = created_at;
         this.updated_at = updated_at;
-        //this.usuario_id = usuario_id;
+        this.id_usuario = id_usuario;
     }
 
-    public Artistas(Long id_artista, String acerca_de, LocalDate created_at, LocalDate updated_at){ //, Long usuario_id) {
+    public Artistas(Long id_artista, String acerca_de, LocalDate created_at, LocalDate updated_at, Usuario usuario_id) {
         this.artistaId = id_artista;
         this.acerca_de = acerca_de;
         this.created_at = created_at;
         this.updated_at = updated_at;
-        //this.usuario_id = usuario_id;
+        this.id_usuario = usuario_id;
     }
 
     public Long getId_artista() {
@@ -78,26 +78,26 @@ public class Artistas {
     public void setUpdated_at(LocalDate updated_at) {
         this.updated_at = updated_at;
     }
-/*
-    public Long getUsuario_id() {
-        return usuario_id;
+
+    public Usuario getId_usuario() {
+        return id_usuario;
     }
 
-    public void setUsuario_id(Long usuario_id) {
-        this.usuario_id = usuario_id;
+    public void setId_usuario(Usuario id_usuario) {
+        this.id_usuario = id_usuario;
     }
-*/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artistas artistas = (Artistas) o;
-        return Objects.equals(artistaId, artistas.artistaId) && Objects.equals(acerca_de, artistas.acerca_de) && Objects.equals(created_at, artistas.created_at) && Objects.equals(updated_at, artistas.updated_at);// && Objects.equals(usuario_id, artistas.usuario_id);
+        return Objects.equals(artistaId, artistas.artistaId) && Objects.equals(acerca_de, artistas.acerca_de) && Objects.equals(created_at, artistas.created_at) && Objects.equals(updated_at, artistas.updated_at) && Objects.equals(id_usuario, artistas.id_usuario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(artistaId, acerca_de, created_at, updated_at);//, usuario_id);
+        return Objects.hash(artistaId, acerca_de, created_at, updated_at, id_usuario);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class Artistas {
                 ", acerca_de='" + acerca_de + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
-                //", usuario_id=" + usuario_id +
+                ", id_usuario=" + id_usuario +
                 '}';
     }
 }

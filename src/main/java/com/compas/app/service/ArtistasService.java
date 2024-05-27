@@ -38,6 +38,7 @@ public class ArtistasService {
                 .orElseThrow(() -> new IllegalStateException("el artista con id " + id_Artista + " no existe"));
         if (acercaDe != null && acercaDe.length() > 0 && !Objects.equals(artista.getAcerca_de(), acercaDe)) {
             artista.setAcerca_de(acercaDe);
+            System.out.println(acercaDe);
         }
     }
 }

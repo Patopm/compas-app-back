@@ -38,17 +38,7 @@ public class UsuarioController {
 
     @PutMapping(path = "/{id_usuario}")
     public void updateUsuario(@PathVariable("id_usuario") Long id_usuario,
-                              @RequestBody(required = false) String nombre,
-                              @RequestBody(required = false) String apellidos,
-                              @RequestBody(required = false) Integer edad,
-                              @RequestBody(required = false) String email,
-                              @RequestBody(required = false) String password,
-                              @RequestBody(required = false) String genero,
-                              @RequestBody(required = false) Integer codigoPostal,
-                              @RequestBody(required = false) String estado,
-                              @RequestBody(required = false) String ciudad,
-                              @RequestBody(required = false) String foto_perfil,
-                              @RequestBody(required = false) String foto_portada){
-        usuarioService.updateUsuario(id_usuario,nombre, apellidos, edad, email, password, genero, codigoPostal, estado, ciudad, foto_perfil, foto_portada);
+                              @RequestBody(required = false) Usuario usuario){
+        usuarioService.updateUsuario(id_usuario,usuario.getNombre(), usuario.getApellidos(), usuario.getEdad(), usuario.getEmail(), usuario.getPassword(), usuario.getGenero(), usuario.getCodigoPostal(), usuario.getEstado(), usuario.getCiudad(), usuario.getFoto_perfil(), usuario.getFoto_portada());
     }
 }
