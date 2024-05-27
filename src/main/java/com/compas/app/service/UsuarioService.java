@@ -24,15 +24,12 @@ public class UsuarioService {
     }
 
 
-    public Usuario addNewUsuario(Usuario usuario) {
+    public void addNewUsuario(Usuario usuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
-        if(usuarioOptional.isPresent()){
+        if(usuarioOptional.isPresent()) {
             throw new IllegalStateException("email taken");
         }
-        usuario.setCreated_at(LocalDate.now());
-        usuario.setUpdated_at(LocalDate.now());
         usuarioRepository.save(usuario);
-        return usuario;
     }
 
     public void deleteUsuario(Long id_usuario) {

@@ -6,6 +6,7 @@ import com.compas.app.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -24,8 +25,10 @@ public class UsuarioController {
     }
 
     @PostMapping("/addUsuario")
-    public Usuario registerNewUsuario(@RequestBody Usuario usuario){
-        return usuarioService.addNewUsuario(usuario);
+    public void registerNewUsuario(@RequestBody Usuario usuario){
+        usuario.setCreated_at(LocalDate.now());
+        usuario.setUpdated_at(LocalDate.now());
+        usuarioService.addNewUsuario(usuario);
     }
 
     @DeleteMapping(path = "/{id_usuario}")

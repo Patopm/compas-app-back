@@ -46,15 +46,25 @@ public class Usuario {
     @Column(name = "foto_portada")
     private String foto_portada;
 
-    @Column(name = "created_at", updatable = false, insertable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDate created_at;
 
-    @Column(name = "created_at", updatable = false, insertable = false)
+    @Column(name = "updated_at")
     private LocalDate updated_at;
 
-    @OneToOne
-    private Artistas artistas;
+    @OneToOne(mappedBy = "id_usuario")
+    private Artistas artistaId;
 
+
+    @PrePersist
+    protected void onCreate(){
+        this.created_at = LocalDate.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updated_at = LocalDate.now();
+    }
 
     public Usuario() {
     }

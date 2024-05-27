@@ -17,16 +17,11 @@ public class ArtistasService {
         this.artistasRepository = artistasRepository;
     }
 
-
     public List<Artistas> getAllArtistas() {
         return artistasRepository.findAll();
     }
 
     public void addNewArtista(Artistas artistas) {
-        //Optional<Artistas> optionalArtistas = artistasRepository.findArtistaByArtistaId(artistas.getId_artista());
-        //if(optionalArtistas.isPresent()){
-        //    throw new IllegalStateException("el usuario con id " + artistas.getId_artista() + " ya existe");
-        //}
         artistasRepository.save(artistas);
     }
 
@@ -37,13 +32,12 @@ public class ArtistasService {
         artistasRepository.deleteById(idArtista);
     }
 
-    //@Transactional
-    //public void updateArtista(Long id_Artista, String acercaDe) {
-        //Artistas artista = artistasRepository.findArtistaByArtistaId(id_Artista)
-        //        .orElseThrow(() -> new IllegalStateException("el artista con id " + id_Artista + " no existe"));
-        //Artistas artista = artistasRepository.findAllById(id_Artista);
-        //if (acercaDe != null && acercaDe.length() > 0 && !Objects.equals(artista.getAcerca_de(), acercaDe)) {
-            //artista.setAcerca_de(acercaDe);
-        //}
-    //}
+    @Transactional
+    public void updateArtista(Long id_Artista, String acercaDe) {
+        Artistas artista = artistasRepository.findArtistaByArtistaId(id_Artista)
+                .orElseThrow(() -> new IllegalStateException("el artista con id " + id_Artista + " no existe"));
+        if (acercaDe != null && acercaDe.length() > 0 && !Objects.equals(artista.getAcerca_de(), acercaDe)) {
+            artista.setAcerca_de(acercaDe);
+        }
+    }
 }
