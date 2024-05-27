@@ -3,6 +3,7 @@ package com.compas.app.service;
 import com.compas.app.model.Usuario;
 import com.compas.app.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
-
+    @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository){
         this.usuarioRepository = usuarioRepository;
     }
@@ -24,15 +25,12 @@ public class UsuarioService {
     }
 
 
-    public Usuario addNewUsuario(Usuario usuario) {
+    public void addNewUsuario(Usuario usuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
-        if(usuarioOptional.isPresent()){
+        if(usuarioOptional.isPresent()) {
             throw new IllegalStateException("email taken");
         }
-        usuario.setCreated_at(LocalDate.now());
-        usuario.setUpdated_at(LocalDate.now());
         usuarioRepository.save(usuario);
-        return usuario;
     }
 
     public void deleteUsuario(Long id_usuario) {
