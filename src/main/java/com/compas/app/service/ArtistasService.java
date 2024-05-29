@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,9 +39,11 @@ public class ArtistasService {
     public void updateArtista(Long id_Artista, String acercaDe) {
         Artistas artista = artistasRepository.findArtistaByArtistaId(id_Artista)
                 .orElseThrow(() -> new ArtistaNotFoundException(id_Artista));
-        if (acercaDe != null && acercaDe.length() > 0 && !Objects.equals(artista.getAcerca_de(), acercaDe)) {
-            artista.setAcerca_de(acercaDe);
-            System.out.println(acercaDe);
+        if (acercaDe == null && !acercaDe.isEmpty() && Objects.equals(artista.getAcerca_de(), acercaDe)) {
+            throw new IllegalStateException("el cambio es el mismo");
         }
+        artista.setAcerca_de(acercaDe);
+        artista.setUpdated_at(LocalDate.now());
+
     }
 }
