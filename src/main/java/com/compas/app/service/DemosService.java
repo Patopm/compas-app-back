@@ -39,7 +39,9 @@ public class DemosService {
                            String titulo,
                            String fechaLanzamiento,
                            String link,
-                           Artistas idArtista){
+                           Artistas artistaId,
+                           Long genero_musical_id
+    ){
         Demos demos = demosRepository.findById(idDemo)
                 .orElseThrow(() -> new IllegalStateException("demo with id " + idDemo + " does not exist"));
         if (titulo != null && titulo.length() > 0 && !Objects.equals(demos.getTitulo(), titulo)){
@@ -51,8 +53,11 @@ public class DemosService {
         if (link != null && link.length() > 0 && !Objects.equals(demos.getLink(), link)){
             demos.setLink(link);
         }
-        if (idArtista != null && !Objects.equals(demos.getId_artista(), idArtista)){
-            demos.setId_artista(idArtista);
+        if (artistaId != null && !Objects.equals(demos.getArtista_id(), artistaId)){
+            demos.setArtista_id(artistaId);
+        }
+        if (genero_musical_id != null && !Objects.equals(demos.getGenero_musical_id(), genero_musical_id)){
+            demos.setGenero_musical_id(genero_musical_id);
         }
     }
 

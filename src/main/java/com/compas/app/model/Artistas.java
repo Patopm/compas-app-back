@@ -44,6 +44,7 @@ public class Artistas {
         this.demo = demo;
     }
 
+
     public Artistas(Long id_artista, String acerca_de, LocalDate created_at, LocalDate updated_at, Usuario id_usuario, List<Demos> demo) {
         this.id_artista = id_artista;
         this.acerca_de = acerca_de;
@@ -59,6 +60,7 @@ public class Artistas {
 
     public void setId_artista(Long id_artista) {
         this.id_artista = id_artista;
+
     }
 
     public String getAcerca_de() {
@@ -106,12 +108,16 @@ public class Artistas {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artistas artistas = (Artistas) o;
+
         return Objects.equals(id_artista, artistas.id_artista) && Objects.equals(acerca_de, artistas.acerca_de) && Objects.equals(created_at, artistas.created_at) && Objects.equals(updated_at, artistas.updated_at) && Objects.equals(id_usuario, artistas.id_usuario) && Objects.equals(demo, artistas.demo);
+
     }
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id_artista, acerca_de, created_at, updated_at, id_usuario, demo);
+
     }
 
     @Override
