@@ -77,6 +77,12 @@ public class Usuario {
         this.updated_at = LocalDate.now();
     }
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentarios> comentarios;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Publicaciones> publicaciones;
+
     public Usuario() {
     }
 
