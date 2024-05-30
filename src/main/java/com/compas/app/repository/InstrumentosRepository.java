@@ -11,7 +11,6 @@ import java.util.Optional;
 @Repository
 public interface InstrumentosRepository extends JpaRepository<Instrumentos, Long> {
 
-    @Query("Select u FROM Instrumentos u WHERE u.instrument)
-    Optional<Instrumentos> findInstrumentByName(String instrumento);
+
 
 }

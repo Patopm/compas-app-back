@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "instrumentos")
 public class Instrumentos {
@@ -21,14 +20,14 @@ public class Instrumentos {
     @Column(name = "instrumento", nullable = false, length = 50, unique = true)
     private String instrumento;
 
-    @Column(name = "localdate", nullable = false, length = 50, updatable = false, insertable = false)
+    @Column(name = "created_at", nullable = false, length = 50, updatable = false, insertable = false)
     private LocalDate created_at;
 
-    @Column(name = "localdate", nullable = false, length = 50)
+    @Column(name = "updated_at", nullable = false, length = 50)
     private LocalDate updated_at;
 
-    @ManyToMany (mappedBy = "id_artista")
-    private Artistas artistaId;
+    @ManyToMany (mappedBy = "id_instrumento")
+    private List<Artistas> artistaId;
 
     public Instrumentos() {
     }
@@ -46,6 +45,45 @@ public class Instrumentos {
         this.updated_at = updated_at;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getInstrumento() {
+        return instrumento;
+    }
+
+    public void setInstrumento(String instrumento) {
+        this.instrumento = instrumento;
+    }
+
+    public LocalDate getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(LocalDate created_at) {
+        this.created_at = created_at;
+    }
+
+    public LocalDate getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(LocalDate updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public List<Artistas> getArtistaId() {
+        return artistaId;
+    }
+
+    public void setArtistaId(List<Artistas> artistaId) {
+        this.artistaId = artistaId;
+    }
 
     @Override
     public String toString() {

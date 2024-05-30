@@ -29,6 +29,18 @@ public class Artistas {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     private Usuario id_usuario;
 
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "artistas_instrumentos",
+            joinColumns = @JoinColumn(name = "FK_ARTISTA", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "FK_INSTRUMENTO", nullable = false)
+    )
+    private List<Instrumentos> id_instrumento;
+
+
+
+
     public Artistas() {
     }
 

@@ -27,7 +27,7 @@ public class generos_musicales {
     @Column(name = "localdate", nullable = false, length = 50)
     private LocalDate updated_at;
 
-    @ManyToMany(mappedBy = "id_artista")
-    @JoinColumn()
-    private Artistas artistaId;
+    //@ManyToMany(mappedBy = "id_artista")
+    //@JoinColumn()
+    //private Artistas artistaId;
 }
