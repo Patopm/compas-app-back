@@ -23,7 +23,7 @@ public class ArtistasController {
         return artistasService.getAllArtistas();
     }
 
-    @PostMapping(path = "/addArtista")
+    @PostMapping(path = "/add-artista")
     public void addNewArtista(@RequestBody Artistas artistas){
         artistas.setCreated_at(LocalDate.now());
         artistas.setUpdated_at(LocalDate.now());
