@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface ArtistasRepository extends JpaRepository<Artistas, Long> {
 
     @Query("Select a FROM Artistas a WHERE a.artistaId =?1")
-    Optional<Artistas> findArtistaByArtistaId(Long artistaId);
+    Optional<Artistas> findArtistaByIdArtista(Long id_artista);
 }
