@@ -1,5 +1,6 @@
 package com.compas.app.service;
 
+import com.compas.app.exceptions.EmailNotFoundException;
 import com.compas.app.exceptions.UsuarioNotFoundException;
 import com.compas.app.model.Usuario;
 import com.compas.app.repository.UsuarioRepository;
@@ -21,6 +22,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
+    //metodos para get
     public List<Usuario> getAllUsers(){
         return usuarioRepository.findAll();
     }
@@ -30,22 +32,30 @@ public class UsuarioService {
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
     }
 
+    public Usuario getUsuarioByEmail(String email){
+        return usuarioRepository.findUsuarioByEmail(email)
+                .orElseThrow(() -> new EmailNotFoundException(email));
+    }
+
+    // metodos para post
     public void addNewUsuario(Usuario usuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
         if(usuarioOptional.isPresent()) {
-            throw new IllegalStateException("email taken");
+            throw new IllegalStateException("email "+ usuario.getEmail() + " ya existe");
         }
         usuarioRepository.save(usuario);
     }
 
-    public void deleteUsuario(Long id_usuario) {
-        boolean exists = usuarioRepository.existsById(id_usuario);
+    //metodos para delete
+    public void deleteUsuario(Long id) {
+        boolean exists = usuarioRepository.existsById(id);
         if (!exists){
-            throw new UsuarioNotFoundException(id_usuario);
+            throw new UsuarioNotFoundException(id);
         }
-        usuarioRepository.deleteById(id_usuario);
+        usuarioRepository.deleteById(id);
     }
 
+    //metodos para post
     @Transactional
     public void updateUsuario(Long idUsuario, Usuario updateUsuario) {
         Usuario usuario = usuarioRepository.findById(idUsuario)
@@ -77,11 +87,12 @@ public class UsuarioService {
         if (updateUsuario.getCiudad() != null && updateUsuario.getCiudad().length() > 0 && !Objects.equals(usuario.getCiudad(), updateUsuario.getCiudad())){
             usuario.setCiudad(updateUsuario.getCiudad());
         }
-        if (updateUsuario.getFoto_perfil() != null && updateUsuario.getFoto_perfil().length() > 0 && !Objects.equals(usuario.getFoto_perfil(), updateUsuario.getFoto_perfil())){
+        if (updateUsuario.getFoto_perfil() != null && !Objects.equals(usuario.getFoto_perfil(), updateUsuario.getFoto_perfil())){
             usuario.setFoto_perfil(updateUsuario.getFoto_perfil());
         }
-        if (updateUsuario.getFoto_portada() != null && updateUsuario.getFoto_portada().length() > 0 && !Objects.equals(usuario.getFoto_portada(), updateUsuario.getFoto_portada())){
+        if (updateUsuario.getFoto_portada() != null && !Objects.equals(usuario.getFoto_portada(), updateUsuario.getFoto_portada())){
             usuario.setFoto_portada(updateUsuario.getFoto_portada());
         }
+        usuario.setUpdated_at(LocalDate.now());
     }
 }

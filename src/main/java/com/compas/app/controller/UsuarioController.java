@@ -1,9 +1,12 @@
 package com.compas.app.controller;
 
 
+import com.compas.app.exceptions.EmailNotFoundException;
 import com.compas.app.model.Usuario;
 import com.compas.app.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -11,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/usuario")
+@CrossOrigin(origins = "*", methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
 public class UsuarioController {
     private final UsuarioService usuarioService;
 
@@ -19,6 +23,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    //Get
     @GetMapping
     public List<Usuario> getAllUsuario(){
         return usuarioService.getAllUsers();
@@ -29,6 +34,16 @@ public class UsuarioController {
         return usuarioService.getUsuarioById(id);
     }
 
+    @GetMapping("/email")
+    public ResponseEntity<Usuario> getUsuarioByEmail(@RequestParam(name = "email-user") String email){
+        Usuario usuario = usuarioService.getUsuarioByEmail(email);
+        if (usuario == null){
+            throw new EmailNotFoundException(email);
+        }
+        return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+    }
+
+    //Post
     @PostMapping("/addUsuario")
     public void registerNewUsuario(@RequestBody Usuario usuario){
         usuario.setCreated_at(LocalDate.now());
@@ -36,11 +51,13 @@ public class UsuarioController {
         usuarioService.addNewUsuario(usuario);
     }
 
+    //Delete
     @DeleteMapping(path = "/{id_usuario}")
     public void deleteUsuario(@PathVariable(name = "id_usuario") Long id_usuario){
         usuarioService.deleteUsuario(id_usuario);
     }
 
+    //Put
     @PutMapping(path = "/{id_usuario}")
     public void updateUsuario(@PathVariable("id_usuario") Long id_usuario,
                               @RequestBody Usuario usuario){
