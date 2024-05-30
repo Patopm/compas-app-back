@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Usuarios")
+@Table(name = "usuarios")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,26 +40,38 @@ public class Usuario {
     @Column(name = "ciudad", nullable = false)
     private String ciudad;
 
-    @Column(name = "foto_perfil")
-    private String foto_perfil;
+    @Lob
+    @Column(name = "foto_perfil", columnDefinition = "MEDIUMBLOB")
+    private byte[] foto_perfil;
 
-    @Column(name = "foto_portada")
-    private String foto_portada;
+    @Lob
+    @Column(name = "foto_portada", columnDefinition = "MEDIUMBLOB")
+    private byte[] foto_portada;
 
-    @Column(name = "created_at", updatable = false, insertable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDate created_at;
 
-    @Column(name = "created_at", updatable = false, insertable = false)
+    @Column(name = "updated_at")
     private LocalDate updated_at;
 
-    @OneToOne
-    private Artistas artistas;
+    @OneToOne(mappedBy = "id_usuario")
+    private Artistas artistaId;
 
+
+    @PrePersist
+    protected void onCreate(){
+        this.created_at = LocalDate.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updated_at = LocalDate.now();
+    }
 
     public Usuario() {
     }
 
-    public Usuario(Long id_usuario, String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada, LocalDate created_at, LocalDate updated_at) {
+    public Usuario(Long id_usuario, String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, byte[] foto_perfil, byte[] foto_portada, LocalDate created_at, LocalDate updated_at) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -76,7 +88,7 @@ public class Usuario {
         this.updated_at = updated_at;
     }
 
-    public Usuario(String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, String foto_perfil, String foto_portada, LocalDate created_at, LocalDate updated_at) {
+    public Usuario(String nombre, String apellidos, Integer edad, String email, String password, String genero, Integer codigoPostal, String estado, String ciudad, byte[] foto_perfil, byte[] foto_portada, LocalDate created_at, LocalDate updated_at) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
@@ -172,19 +184,19 @@ public class Usuario {
         this.ciudad = ciudad;
     }
 
-    public String getFoto_perfil() {
+    public byte[] getFoto_perfil() {
         return foto_perfil;
     }
 
-    public void setFoto_perfil(String foto_perfil) {
+    public void setFoto_perfil(byte[] foto_perfil) {
         this.foto_perfil = foto_perfil;
     }
 
-    public String getFoto_portada() {
+    public byte[] getFoto_portada() {
         return foto_portada;
     }
 
-    public void setFoto_portada(String foto_portada) {
+    public void setFoto_portada(byte[] foto_portada) {
         this.foto_portada = foto_portada;
     }
 
