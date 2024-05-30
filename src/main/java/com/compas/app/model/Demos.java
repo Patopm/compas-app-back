@@ -18,7 +18,7 @@ public class Demos {
     private String titulo;
 
     @Column(name = "fecha_de_lanzamiento", nullable = false)
-    private LocalDate fecha_de_lanzamiento;
+    private String fecha_de_lanzamiento;
 
     @Column(name = "link", nullable = false)
     private String link;
@@ -31,7 +31,7 @@ public class Demos {
 
     @ManyToOne
     @JoinColumn(name="id_artista", nullable = true)
-    private Artistas artista_id;
+    private Artistas id_artista;
 
     //@OneToOne
     //private Usuario usuario_id;
@@ -42,23 +42,23 @@ public class Demos {
     public Demos() {
     }
 
-    public Demos(Long id_demo, String titulo, LocalDate fecha_de_lanzamiento, String link, LocalDate created_at, LocalDate updated_at, Artistas artista_id) {
+    public Demos(Long id_demo, String titulo, String fecha_de_lanzamiento, String link, LocalDate created_at, LocalDate updated_at, Artistas id_artista) {
         this.id_demo = id_demo;
         this.titulo = titulo;
         this.fecha_de_lanzamiento = fecha_de_lanzamiento;
         this.link = link;
         this.created_at = created_at;
         this.updated_at = updated_at;
-        this.artista_id = artista_id;
+        this.id_artista = id_artista;
     }
 
-    public Demos(String titulo, LocalDate fecha_de_lanzamiento, String link, LocalDate created_at, LocalDate updated_at, Artistas artista_id) {
+    public Demos(String titulo, String fecha_de_lanzamiento, String link, LocalDate created_at, LocalDate updated_at, Artistas id_artista) {
         this.titulo = titulo;
         this.fecha_de_lanzamiento = fecha_de_lanzamiento;
         this.link = link;
         this.created_at = created_at;
         this.updated_at = updated_at;
-        this.artista_id = artista_id;
+        this.id_artista = id_artista;
     }
 
     public Long getId_demo() {
@@ -77,11 +77,11 @@ public class Demos {
         this.titulo = titulo;
     }
 
-    public LocalDate getFecha_de_lanzamiento() {
+    public String getFecha_de_lanzamiento() {
         return fecha_de_lanzamiento;
     }
 
-    public void setFecha_de_lanzamiento(LocalDate fecha_de_lanzamiento) {
+    public void setFecha_de_lanzamiento(String fecha_de_lanzamiento) {
         this.fecha_de_lanzamiento = fecha_de_lanzamiento;
     }
 
@@ -109,12 +109,12 @@ public class Demos {
         this.updated_at = updated_at;
     }
 
-    public Artistas getArtista_id() {
-        return artista_id;
+    public Artistas getId_artista() {
+        return id_artista;
     }
 
-    public void setArtista_id(Artistas artista_id) {
-        this.artista_id = artista_id;
+    public void setId_artista(Artistas id_artista) {
+        this.id_artista = id_artista;
     }
 
     @Override
@@ -122,12 +122,12 @@ public class Demos {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Demos demos = (Demos) o;
-        return Objects.equals(id_demo, demos.id_demo) && Objects.equals(titulo, demos.titulo) && Objects.equals(fecha_de_lanzamiento, demos.fecha_de_lanzamiento) && Objects.equals(link, demos.link) && Objects.equals(created_at, demos.created_at) && Objects.equals(updated_at, demos.updated_at) && Objects.equals(artista_id, demos.artista_id);
+        return Objects.equals(id_demo, demos.id_demo) && Objects.equals(titulo, demos.titulo) && Objects.equals(fecha_de_lanzamiento, demos.fecha_de_lanzamiento) && Objects.equals(link, demos.link) && Objects.equals(created_at, demos.created_at) && Objects.equals(updated_at, demos.updated_at) && Objects.equals(id_artista, demos.id_artista);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_demo, titulo, fecha_de_lanzamiento, link, created_at, updated_at, artista_id);
+        return Objects.hash(id_demo, titulo, fecha_de_lanzamiento, link, created_at, updated_at, id_artista);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class Demos {
                 ", link='" + link + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
-                ", artista_id=" + artista_id +
+                ", id_artista=" + id_artista +
                 '}';
     }
 }
