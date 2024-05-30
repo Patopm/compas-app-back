@@ -31,10 +31,10 @@ public class MeEntonaController {
     public MeEntona addNewMeEntona(@RequestBody MeEntona newMeEntona){
           return meEntonaService.addNewMeEntona(newMeEntona);
     }
-    @PutMapping (path ="/{id}")
+    /* @PutMapping (path ="/{id}")
     public MeEntona updateMeEntona(@PathVariable("id_me_entona") Long idMeEntona,
                                    @RequestBody MeEntona updateMeEntona ){
         return meEntonaService.updateMeEntona(idMeEntona, updateMeEntona);
-    }
+    }*/
 
 }

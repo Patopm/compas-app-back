@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ArtistasRepository extends JpaRepository<Artistas, Long> {
 
-    @Query("Select a FROM Artistas a WHERE a.artistaId =?1")
-    Optional<Artistas> findArtistaByIdArtista(Long id_artista);
+    @Query(value = "Select a FROM Artistas a WHERE a.artistaId =?1", nativeQuery = true)
+    Optional<Artistas> findArtistaByArtistaId(Long id_artista);
 }

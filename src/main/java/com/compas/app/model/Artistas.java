@@ -3,13 +3,14 @@ package com.compas.app.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "artistas")
-public class Artistas {
+public class Artistas implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +31,7 @@ public class Artistas {
     private Usuario id_usuario;
 
     @OneToMany(mappedBy = "artista_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    // @JsonManagedReference
     private List<Demos> demo;
 
     public Artistas() {
