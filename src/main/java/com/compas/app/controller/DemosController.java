@@ -1,5 +1,6 @@
 package com.compas.app.controller;
 
+import com.compas.app.model.Artistas;
 import com.compas.app.model.Demos;
 import com.compas.app.service.DemosService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
 package com.compas.app.service;
 
+import com.compas.app.model.Artistas;
 import com.compas.app.model.Demos;
 import com.compas.app.repository.DemosRepository;
 import jakarta.transaction.Transactional;
