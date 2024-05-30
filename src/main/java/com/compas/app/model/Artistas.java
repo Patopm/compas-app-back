@@ -1,5 +1,6 @@
 package com.compas.app.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.springframework.cache.aspectj.JCacheCacheAspect;
 
@@ -29,30 +30,36 @@ public class Artistas {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     private Usuario id_usuario;
 
+    @OneToMany(mappedBy = "artista_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Demos> demo;
+
     public Artistas() {
     }
 
-    public Artistas(String acerca_de, LocalDate created_at, LocalDate updated_at, Usuario id_usuario) {
+    public Artistas(String acerca_de, LocalDate created_at, LocalDate updated_at, Usuario id_usuario, List<Demos> demo) {
         this.acerca_de = acerca_de;
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.id_usuario = id_usuario;
+        this.demo = demo;
     }
 
-    public Artistas(Long id_artista, String acerca_de, LocalDate created_at, LocalDate updated_at, Usuario usuario_id) {
-        this.artistaId = id_artista;
+    public Artistas(Long artistaId, String acerca_de, LocalDate created_at, LocalDate updated_at, Usuario id_usuario, List<Demos> demo) {
+        this.artistaId = artistaId;
         this.acerca_de = acerca_de;
         this.created_at = created_at;
         this.updated_at = updated_at;
-        this.id_usuario = usuario_id;
+        this.id_usuario = id_usuario;
+        this.demo = demo;
     }
 
-    public Long getId_artista() {
+    public Long getArtistaId() {
         return artistaId;
     }
 
-    public void setId_artista(Long id_artista) {
-        this.artistaId = id_artista;
+    public void setArtistaId(Long artistaId) {
+        this.artistaId = artistaId;
     }
 
     public String getAcerca_de() {
@@ -87,27 +94,36 @@ public class Artistas {
         this.id_usuario = id_usuario;
     }
 
+    public List<Demos> getDemo() {
+        return demo;
+    }
+
+    public void setDemo(List<Demos> demo) {
+        this.demo = demo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artistas artistas = (Artistas) o;
-        return Objects.equals(artistaId, artistas.artistaId) && Objects.equals(acerca_de, artistas.acerca_de) && Objects.equals(created_at, artistas.created_at) && Objects.equals(updated_at, artistas.updated_at) && Objects.equals(id_usuario, artistas.id_usuario);
+        return Objects.equals(artistaId, artistas.artistaId) && Objects.equals(acerca_de, artistas.acerca_de) && Objects.equals(created_at, artistas.created_at) && Objects.equals(updated_at, artistas.updated_at) && Objects.equals(id_usuario, artistas.id_usuario) && Objects.equals(demo, artistas.demo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(artistaId, acerca_de, created_at, updated_at, id_usuario);
+        return Objects.hash(artistaId, acerca_de, created_at, updated_at, id_usuario, demo);
     }
 
     @Override
     public String toString() {
         return "Artistas{" +
-                "id_artista=" + artistaId +
+                "artistaId=" + artistaId +
                 ", acerca_de='" + acerca_de + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
                 ", id_usuario=" + id_usuario +
+                ", demo=" + demo +
                 '}';
     }
 }

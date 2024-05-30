@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "api/v1/demos")
+@RequestMapping(path = "/api/v1/demos")
 public class DemosController {
     private final DemosService demosService;
 
@@ -24,7 +24,7 @@ public class DemosController {
         return demosService.getAllDemos();
     }
 
-    @PostMapping("/addDemo")
+    @PostMapping("/add-demo")
     public Demos registerNewDemo(@RequestBody Demos demos){
         return demosService.addNewDemo(demos);
     }
@@ -39,8 +39,9 @@ public class DemosController {
                               @RequestBody(required = false) String titulo,
                               @RequestBody(required = false) String fechaLanzamiento,
                               @RequestBody(required = false) String link,
-                              @RequestBody(required = false) Artistas idArtista
+                              @RequestBody(required = false) Artistas artistaId,
+                            @RequestBody(required = false) Long genero_musical_id
     ){
-        demosService.updateDemo(id_demo, titulo, fechaLanzamiento, link, idArtista);
+        demosService.updateDemo(id_demo, titulo, fechaLanzamiento, link, artistaId, genero_musical_id);
     }
 }

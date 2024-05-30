@@ -1,5 +1,6 @@
 package com.compas.app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -29,9 +30,12 @@ public class Demos {
     @Column(name = "updated_at", insertable = false)
     private LocalDate updated_at;
 
-    @ManyToOne
-    @JoinColumn(name="id_artista", nullable = true)
-    private Artistas id_artista;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="artistaId", nullable = false)
+    @JsonBackReference
+    private Artistas artista_id;
+
+    private Long genero_musical_id;
 
     //@OneToOne
     //private Usuario usuario_id;
@@ -42,23 +46,25 @@ public class Demos {
     public Demos() {
     }
 
-    public Demos(Long id_demo, String titulo, String fecha_de_lanzamiento, String link, LocalDate created_at, LocalDate updated_at, Artistas id_artista) {
+    public Demos(Long id_demo, String titulo, String fecha_de_lanzamiento, String link, LocalDate created_at, LocalDate updated_at, Artistas artista_id, Long genero_musical_id) {
         this.id_demo = id_demo;
         this.titulo = titulo;
         this.fecha_de_lanzamiento = fecha_de_lanzamiento;
         this.link = link;
         this.created_at = created_at;
         this.updated_at = updated_at;
-        this.id_artista = id_artista;
+        this.artista_id = artista_id;
+        this.genero_musical_id = genero_musical_id;
     }
 
-    public Demos(String titulo, String fecha_de_lanzamiento, String link, LocalDate created_at, LocalDate updated_at, Artistas id_artista) {
+    public Demos(String titulo, String fecha_de_lanzamiento, String link, LocalDate created_at, LocalDate updated_at, Artistas artista_id, Long genero_musical_id) {
         this.titulo = titulo;
         this.fecha_de_lanzamiento = fecha_de_lanzamiento;
         this.link = link;
         this.created_at = created_at;
         this.updated_at = updated_at;
-        this.id_artista = id_artista;
+        this.artista_id = artista_id;
+        this.genero_musical_id = genero_musical_id;
     }
 
     public Long getId_demo() {
@@ -109,12 +115,20 @@ public class Demos {
         this.updated_at = updated_at;
     }
 
-    public Artistas getId_artista() {
-        return id_artista;
+    public Artistas getArtista_id() {
+        return artista_id;
     }
 
-    public void setId_artista(Artistas id_artista) {
-        this.id_artista = id_artista;
+    public void setArtista_id(Artistas artista_id) {
+        this.artista_id = artista_id;
+    }
+
+    public Long getGenero_musical_id() {
+        return genero_musical_id;
+    }
+
+    public void setGenero_musical_id(Long genero_musical_id) {
+        this.genero_musical_id = genero_musical_id;
     }
 
     @Override
@@ -122,12 +136,12 @@ public class Demos {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Demos demos = (Demos) o;
-        return Objects.equals(id_demo, demos.id_demo) && Objects.equals(titulo, demos.titulo) && Objects.equals(fecha_de_lanzamiento, demos.fecha_de_lanzamiento) && Objects.equals(link, demos.link) && Objects.equals(created_at, demos.created_at) && Objects.equals(updated_at, demos.updated_at) && Objects.equals(id_artista, demos.id_artista);
+        return Objects.equals(id_demo, demos.id_demo) && Objects.equals(titulo, demos.titulo) && Objects.equals(fecha_de_lanzamiento, demos.fecha_de_lanzamiento) && Objects.equals(link, demos.link) && Objects.equals(created_at, demos.created_at) && Objects.equals(updated_at, demos.updated_at) && Objects.equals(artista_id, demos.artista_id) && Objects.equals(genero_musical_id, demos.genero_musical_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_demo, titulo, fecha_de_lanzamiento, link, created_at, updated_at, id_artista);
+        return Objects.hash(id_demo, titulo, fecha_de_lanzamiento, link, created_at, updated_at, artista_id, genero_musical_id);
     }
 
     @Override
@@ -135,11 +149,12 @@ public class Demos {
         return "Demos{" +
                 "id_demo=" + id_demo +
                 ", titulo='" + titulo + '\'' +
-                ", fecha_de_lanzamiento=" + fecha_de_lanzamiento +
+                ", fecha_de_lanzamiento='" + fecha_de_lanzamiento + '\'' +
                 ", link='" + link + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
-                ", id_artista=" + id_artista +
+                ", artista_id=" + artista_id +
+                ", genero_musical_id=" + genero_musical_id +
                 '}';
     }
 }
