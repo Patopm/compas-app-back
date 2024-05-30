@@ -87,10 +87,10 @@ public class UsuarioService {
         if (updateUsuario.getCiudad() != null && updateUsuario.getCiudad().length() > 0 && !Objects.equals(usuario.getCiudad(), updateUsuario.getCiudad())){
             usuario.setCiudad(updateUsuario.getCiudad());
         }
-        if (updateUsuario.getFoto_perfil() != null && updateUsuario.getFoto_perfil().length() > 0 && !Objects.equals(usuario.getFoto_perfil(), updateUsuario.getFoto_perfil())){
+        if (updateUsuario.getFoto_perfil() != null && !Objects.equals(usuario.getFoto_perfil(), updateUsuario.getFoto_perfil())){
             usuario.setFoto_perfil(updateUsuario.getFoto_perfil());
         }
-        if (updateUsuario.getFoto_portada() != null && updateUsuario.getFoto_portada().length() > 0 && !Objects.equals(usuario.getFoto_portada(), updateUsuario.getFoto_portada())){
+        if (updateUsuario.getFoto_portada() != null && !Objects.equals(usuario.getFoto_portada(), updateUsuario.getFoto_portada())){
             usuario.setFoto_portada(updateUsuario.getFoto_portada());
         }
         usuario.setUpdated_at(LocalDate.now());
