@@ -3,6 +3,7 @@ package com.compas.app.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -56,6 +57,14 @@ public class Usuario {
 
     @OneToOne(mappedBy = "id_usuario")
     private Artistas artistaId;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<MeEntona> meEntona;
+    @JoinTable(
+            name = "usuarios_me_entona",
+            joinColumns = @JoinColumn(name = "FK_USUARIO", nullable = false),
+            inverseJoinColumns = @JoinColumn(name="FK_ME_ENTONA", nullable = false)
+    )
 
 
     @PrePersist
