@@ -1,6 +1,6 @@
 package com.compas.app.repository;
 
-import com.compas.app.model.Usuario;
+import com.compas.app.model.Artistas;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface ArtistasRepository extends JpaRepository<Artistas, Long> {
 
-    @Query("Select u FROM Usuario u WHERE u.email =?1")
-    Optional<Usuario> findUsuarioByEmail(String email);
+    @Query("Select a FROM Artistas a WHERE a.artistaId =?1")
+    Optional<Artistas> findArtistaByArtistaId(Long artistaId);
 }
