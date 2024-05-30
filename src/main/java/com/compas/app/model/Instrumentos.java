@@ -12,17 +12,23 @@ import java.util.Objects;
 @Entity
 @Table(name = "instrumentos")
 public class Instrumentos {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "instrumento", nullable = false, length = 50, unique = true)
     private String instrumento;
 
     @Column(name = "localdate", nullable = false, length = 50, updatable = false, insertable = false)
     private LocalDate created_at;
+
     @Column(name = "localdate", nullable = false, length = 50)
     private LocalDate updated_at;
+
+    @ManyToMany (mappedBy = "id_artista")
+    private Artistas artistaId;
 
     public Instrumentos() {
     }
