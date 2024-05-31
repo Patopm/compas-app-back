@@ -1,14 +1,15 @@
 package com.compas.app.model;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "publicaciones")
-public class Publicaciones {
+public class Publicaciones implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_publicacion")
@@ -25,32 +26,32 @@ public class Publicaciones {
     private byte[] multimedia;
 
     @Column(name = "created_at", updatable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comentarios> comentarios;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    private Usuario usuario_id;
 
     public Publicaciones() {
     }
 
-    public Publicaciones(String titulo, String descripcion, byte[] multimedia, LocalDate createdAt, LocalDate updatedAt, List<Comentarios> comentarios, Usuario usuario) {
+    public Publicaciones(String titulo, String descripcion, byte[] multimedia, LocalDateTime createdAt, LocalDateTime updatedAt, List<Comentarios> comentarios, Usuario usuario_id) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.multimedia = multimedia;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.comentarios = comentarios;
-        this.usuario = usuario;
+        this.usuario_id = usuario_id;
     }
 
-    public Publicaciones(Long idPublicacion, String titulo, String descripcion, byte[] multimedia, LocalDate createdAt, LocalDate updatedAt, List<Comentarios> comentarios, Usuario usuario) {
+    public Publicaciones(Long idPublicacion, String titulo, String descripcion, byte[] multimedia, LocalDateTime createdAt, LocalDateTime updatedAt, List<Comentarios> comentarios, Usuario usuario_id) {
         this.idPublicacion = idPublicacion;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -58,7 +59,7 @@ public class Publicaciones {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.comentarios = comentarios;
-        this.usuario = usuario;
+        this.usuario_id = usuario_id;
     }
 
     public Long getIdPublicacion() {
@@ -93,19 +94,19 @@ public class Publicaciones {
         this.multimedia = multimedia;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -117,12 +118,12 @@ public class Publicaciones {
         this.comentarios = comentarios;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Long getUsuario_id() {
+        return usuario_id.getId_usuario();
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario_id(Usuario usuario_id) {
+        this.usuario_id = usuario_id;
     }
 
     @Override
@@ -130,12 +131,12 @@ public class Publicaciones {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Publicaciones that = (Publicaciones) o;
-        return Objects.equals(idPublicacion, that.idPublicacion) && Objects.equals(titulo, that.titulo) && Objects.equals(descripcion, that.descripcion) && Objects.deepEquals(multimedia, that.multimedia) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(comentarios, that.comentarios) && Objects.equals(usuario, that.usuario);
+        return Objects.equals(idPublicacion, that.idPublicacion) && Objects.equals(titulo, that.titulo) && Objects.equals(descripcion, that.descripcion) && Objects.deepEquals(multimedia, that.multimedia) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(comentarios, that.comentarios) && Objects.equals(usuario_id, that.usuario_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPublicacion, titulo, descripcion, Arrays.hashCode(multimedia), createdAt, updatedAt, comentarios, usuario);
+        return Objects.hash(idPublicacion, titulo, descripcion, Arrays.hashCode(multimedia), createdAt, updatedAt, comentarios, usuario_id);
     }
 
     @Override
@@ -148,7 +149,7 @@ public class Publicaciones {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", comentarios=" + comentarios +
-                ", usuario=" + usuario +
+                ", usuario=" + usuario_id +
                 '}';
     }
 }

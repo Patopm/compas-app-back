@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -25,8 +26,8 @@ public class ArtistasController {
 
     @PostMapping(path = "/add-artista")
     public void addNewArtista(@RequestBody Artistas artistas){
-        artistas.setCreated_at(LocalDate.now());
-        artistas.setUpdated_at(LocalDate.now());
+        artistas.setCreated_at(LocalDateTime.now());
+        artistas.setUpdated_at(LocalDateTime.now());
         artistasService.addNewArtista(artistas);
     }
 

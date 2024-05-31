@@ -1,6 +1,7 @@
 package com.compas.app.repository;
 
 import com.compas.app.model.Publicaciones;
+import com.compas.app.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

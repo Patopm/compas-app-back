@@ -2,6 +2,7 @@ package com.compas.app.service;
 
 import com.compas.app.exceptions.PublicacionNotFoundException;
 import com.compas.app.model.Publicaciones;
+import com.compas.app.model.Usuario;
 import com.compas.app.repository.PublicacionesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +23,15 @@ public class PublicacionesService {
     public List<Publicaciones> getAllPublicaciones() {
         return publicacionesRepository.findAll();
     }
+
     public Publicaciones getPublicacionById(Long id){
         return publicacionesRepository.findPubliacionById(id)
                 .orElseThrow(()-> new PublicacionNotFoundException(id));
     }
 
     //Métodos para post
-    /*public void addNewPublicacion(Publicaciones publicaciones){
-        Optional<Publicaciones> publicacionesOptional = publicacionesRepository.findPubliacionById(publicaciones.getIdPublicacion());
+    public void addNewPublicacion(Publicaciones publicaciones){
+        Optional<Publicaciones> publicacionesOptional = publicacionesRepository.findPubliacionById(publicaciones.getUsuario_id());
         if(publicacionesOptional.isPresent()){
             throw new IllegalStateException("id " + publicaciones.getIdPublicacion() + "Ya se realizó esta publicacion");
         }
@@ -46,5 +48,13 @@ public class PublicacionesService {
 
     public void deleteById(Long id) {
         publicacionesRepository.deleteById(id);
-    }*/
+    }
+
+    public void deletePublicacion(Long id) {
+        boolean exists = publicacionesRepository.existsById(id);
+        if(!exists){
+            throw new PublicacionNotFoundException(id);
+        }
+        publicacionesRepository.deleteById(id);
+    }
 }

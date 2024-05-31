@@ -2,7 +2,7 @@ package com.compas.app.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,10 +19,10 @@ public class Instrumentos {
     private String instrumento;
 
     @Column(name = "created_at", nullable = false, length = 50, updatable = false, insertable = false)
-    private LocalDate created_at;
+    private LocalDateTime created_at;
 
     @Column(name = "updated_at", nullable = false, length = 50)
-    private LocalDate updated_at;
+    private LocalDateTime updated_at;
 
     @ManyToMany (mappedBy = "id_instrumento")
     private List<Artistas> artistaId;
@@ -30,13 +30,13 @@ public class Instrumentos {
     public Instrumentos() {
     }
 
-    public Instrumentos(String instrumento, LocalDate created_at, LocalDate updated_at) {
+    public Instrumentos(String instrumento, LocalDateTime created_at, LocalDateTime updated_at) {
         this.instrumento = instrumento;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
 
-    public Instrumentos(Long id, String instrumento, LocalDate created_at, LocalDate updated_at) {
+    public Instrumentos(Long id, String instrumento, LocalDateTime created_at, LocalDateTime updated_at) {
         this.id = id;
         this.instrumento = instrumento;
         this.created_at = created_at;
@@ -59,19 +59,19 @@ public class Instrumentos {
         this.instrumento = instrumento;
     }
 
-    public LocalDate getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public LocalDate getUpdated_at() {
+    public LocalDateTime getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(LocalDate updated_at) {
+    public void setUpdated_at(LocalDateTime updated_at) {
         this.updated_at = updated_at;
     }
 
