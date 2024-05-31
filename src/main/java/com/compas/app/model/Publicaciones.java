@@ -40,7 +40,7 @@ public class Publicaciones {
     public Publicaciones() {
     }
 
-    public Publicaciones(String titulo, String descripcion, byte[] multimedia, LocalDate createdAt, LocalDate updatedAt, List<Comentarios> comentarios, Usuario usuario) {
+    public Publicaciones(String titulo, String descripcion, byte[] multimedia, LocalDateTime createdAt, LocalDateTime updatedAt, List<Comentarios> comentarios, Usuario usuario) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.multimedia = multimedia;
@@ -50,7 +50,7 @@ public class Publicaciones {
         this.usuario = usuario;
     }
 
-    public Publicaciones(Long idPublicacion, String titulo, String descripcion, byte[] multimedia, LocalDate createdAt, LocalDate updatedAt, List<Comentarios> comentarios, Usuario usuario) {
+    public Publicaciones(Long idPublicacion, String titulo, String descripcion, byte[] multimedia, LocalDateTime createdAt, LocalDateTime updatedAt, List<Comentarios> comentarios, Usuario usuario) {
         this.idPublicacion = idPublicacion;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -93,19 +93,19 @@ public class Publicaciones {
         this.multimedia = multimedia;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
