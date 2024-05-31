@@ -55,7 +55,7 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    //metodos para post
+    //metodos para put
     @Transactional
     public void updateUsuario(Long idUsuario, Usuario updateUsuario) {
         Usuario usuario = usuarioRepository.findById(idUsuario)
