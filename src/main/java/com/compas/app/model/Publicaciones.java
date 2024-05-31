@@ -1,6 +1,8 @@
 package com.compas.app.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,6 +37,7 @@ public class Publicaciones {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonBackReference
     private Usuario usuario;
 
     public Publicaciones() {
