@@ -1,6 +1,5 @@
 package com.compas.app.model;
 
-
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -22,7 +21,7 @@ public class Generos_musicales {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime created_at;
 
-    @Column(name = "Updated_at")
+    @Column(name = "Updated_at", nullable = false, length = 50)
     private LocalDateTime updated_at;
 
     @ManyToMany (mappedBy = "id_genero_musical")
