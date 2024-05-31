@@ -59,12 +59,13 @@ public class Usuario {
     private Artistas artistaId;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<MeEntona> meEntona;
     @JoinTable(
             name = "usuarios_me_entona",
             joinColumns = @JoinColumn(name = "FK_USUARIO", nullable = false),
             inverseJoinColumns = @JoinColumn(name="FK_ME_ENTONA", nullable = false)
     )
+    private List<MeEntona> meEntona;
+
 
 
     @PrePersist

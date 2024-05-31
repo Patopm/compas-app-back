@@ -1,10 +1,9 @@
 package com.compas.app.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,10 +20,10 @@ public class Artistas implements Serializable {
     private String acerca_de;
 
     @Column(name = "created_at")
-    private LocalDate created_at;
+    private LocalDateTime created_at;
 
     @Column(name = "updated_at")
-    private LocalDate updated_at;
+    private LocalDateTime updated_at;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
@@ -34,10 +33,30 @@ public class Artistas implements Serializable {
     // @JsonManagedReference
     private List<Demos> demo;
 
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "artistas_instrumentos",
+            joinColumns = @JoinColumn(name = "FK_ARTISTA", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "FK_INSTRUMENTO", nullable = false)
+    )
+    private List<Instrumentos> id_instrumento;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "artistas_generos_musicales",
+            joinColumns = @JoinColumn(name = "FK_ARTISTA", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "FK_GENEROMUSICAL", nullable = false)
+    )
+    private List<Generos_musicales> id_genero_musical;
+
+
+
+
     public Artistas() {
     }
 
-    public Artistas(String acerca_de, LocalDate created_at, LocalDate updated_at, Usuario id_usuario, List<Demos> demo) {
+    public Artistas(String acerca_de, LocalDateTime created_at, LocalDateTime updated_at, Usuario id_usuario, List<Demos> demo) {
         this.acerca_de = acerca_de;
         this.created_at = created_at;
         this.updated_at = updated_at;
@@ -46,7 +65,7 @@ public class Artistas implements Serializable {
     }
 
 
-    public Artistas(Long id_artista, String acerca_de, LocalDate created_at, LocalDate updated_at, Usuario id_usuario, List<Demos> demo) {
+    public Artistas(Long id_artista, String acerca_de, LocalDateTime created_at, LocalDateTime updated_at, Usuario id_usuario, List<Demos> demo) {
         this.id_artista = id_artista;
         this.acerca_de = acerca_de;
         this.created_at = created_at;
@@ -72,19 +91,19 @@ public class Artistas implements Serializable {
         this.acerca_de = acerca_de;
     }
 
-    public LocalDate getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public LocalDate getUpdated_at() {
+    public LocalDateTime getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(LocalDate updated_at) {
+    public void setUpdated_at(LocalDateTime updated_at) {
         this.updated_at = updated_at;
     }
 
