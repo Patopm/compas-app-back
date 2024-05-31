@@ -43,6 +43,16 @@ public class UsuarioController {
         return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     }
 
+    @GetMapping("/authenticate")
+    public ResponseEntity<Usuario> authenticateUser(@RequestParam(name = "email-user") String email,
+                                                    @RequestParam(name = "password-user") String password){
+        Usuario usuario = usuarioService.findUsuarioByEmailAndPassword(email, password);
+        if (usuario == null){
+            throw new EmailNotFoundException(email);
+        }
+        return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+    }
+
     //Post
     @PostMapping("/add-usuario")
     public void registerNewUsuario(@RequestBody Usuario usuario){

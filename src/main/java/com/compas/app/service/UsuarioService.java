@@ -37,6 +37,11 @@ public class UsuarioService {
                 .orElseThrow(() -> new EmailNotFoundException(email));
     }
 
+    public Usuario findUsuarioByEmailAndPassword(String email, String password){
+        return usuarioRepository.findUsuarioByEmailAndPassword(email, password)
+                .orElseThrow(() -> new EmailNotFoundException(email));
+    }
+
     // metodos para post
     public void addNewUsuario(Usuario usuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
