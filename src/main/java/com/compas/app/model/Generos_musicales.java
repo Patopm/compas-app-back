@@ -1,9 +1,8 @@
 package com.compas.app.model;
 
-
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,36 +18,36 @@ public class Generos_musicales {
     @Column(name = "genero_musical", nullable = false, length = 50, unique = true)
     private String genero_musical;
 
-    @Column(name = "created_at", updatable = false)
-    private LocalDate created_at;
+    @Column(name = "created_at", updatable = false, nullable = false, length = 50)
+    private LocalDateTime created_at;
 
-    @Column(name = "Updated_at")
-    private LocalDate updated_at;
+    @Column(name = "Updated_at", nullable = false, length = 50)
+    private LocalDateTime updated_at;
 
     @ManyToMany (mappedBy = "id_genero_musical")
     private List<Artistas> artistaId;
 
     @PrePersist
     protected void onCreate(){
-        this.created_at = LocalDate.now();
+        this.created_at = LocalDateTime.now();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.updated_at = LocalDate.now();
+        this.updated_at = LocalDateTime.now();
     }
 
     public Generos_musicales() {
     }
 
-    public Generos_musicales(String genero_musical, LocalDate created_at, LocalDate updated_at, List<Artistas> artistaId) {
+    public Generos_musicales(String genero_musical, LocalDateTime created_at, LocalDateTime updated_at, List<Artistas> artistaId) {
         this.genero_musical = genero_musical;
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.artistaId = artistaId;
     }
 
-    public Generos_musicales(Long id, String genero_musical, LocalDate created_at, LocalDate updated_at, List<Artistas> artistaId) {
+    public Generos_musicales(Long id, String genero_musical, LocalDateTime created_at, LocalDateTime updated_at, List<Artistas> artistaId) {
         this.id = id;
         this.genero_musical = genero_musical;
         this.created_at = created_at;
@@ -72,19 +71,19 @@ public class Generos_musicales {
         this.genero_musical = genero_musical;
     }
 
-    public LocalDate getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public LocalDate getUpdated_at() {
+    public LocalDateTime getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(LocalDate updated_at) {
+    public void setUpdated_at(LocalDateTime updated_at) {
         this.updated_at = updated_at;
     }
 

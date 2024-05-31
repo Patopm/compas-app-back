@@ -2,7 +2,7 @@ package com.compas.app.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,29 +18,41 @@ public class Instrumentos {
     @Column(name = "instrumento", nullable = false, length = 50, unique = true)
     private String instrumento;
 
-    @Column(name = "created_at", nullable = false, length = 50, updatable = false, insertable = false)
-    private LocalDate created_at;
+    @Column(name = "created_at", updatable = false, nullable = false, length = 50)
+    private LocalDateTime created_at;
 
     @Column(name = "updated_at", nullable = false, length = 50)
-    private LocalDate updated_at;
+    private LocalDateTime updated_at;
 
     @ManyToMany (mappedBy = "id_instrumento")
     private List<Artistas> artistaId;
 
+    @PrePersist
+    protected void onCreate(){
+        this.created_at = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updated_at = LocalDateTime.now();
+    }
+
     public Instrumentos() {
     }
 
-    public Instrumentos(String instrumento, LocalDate created_at, LocalDate updated_at) {
+    public Instrumentos(String instrumento, LocalDateTime created_at, LocalDateTime updated_at, List<Artistas> artistaId) {
         this.instrumento = instrumento;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.artistaId = artistaId;
     }
 
-    public Instrumentos(Long id, String instrumento, LocalDate created_at, LocalDate updated_at) {
+    public Instrumentos(Long id, String instrumento, LocalDateTime created_at, LocalDateTime updated_at, List<Artistas> artistaId) {
         this.id = id;
         this.instrumento = instrumento;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.artistaId = artistaId;
     }
 
     public Long getId() {
@@ -59,19 +71,19 @@ public class Instrumentos {
         this.instrumento = instrumento;
     }
 
-    public LocalDate getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public LocalDate getUpdated_at() {
+    public LocalDateTime getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(LocalDate updated_at) {
+    public void setUpdated_at(LocalDateTime updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -90,6 +102,7 @@ public class Instrumentos {
                 ", instrumento='" + instrumento + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
+                ", artistaId=" + artistaId +
                 '}';
     }
 
@@ -98,11 +111,11 @@ public class Instrumentos {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Instrumentos that = (Instrumentos) o;
-        return Objects.equals(id, that.id) && Objects.equals(instrumento, that.instrumento) && Objects.equals(created_at, that.created_at) && Objects.equals(updated_at, that.updated_at);
+        return Objects.equals(id, that.id) && Objects.equals(instrumento, that.instrumento) && Objects.equals(created_at, that.created_at) && Objects.equals(updated_at, that.updated_at) && Objects.equals(artistaId, that.artistaId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, instrumento, created_at, updated_at);
+        return Objects.hash(id, instrumento, created_at, updated_at, artistaId);
     }
 }
