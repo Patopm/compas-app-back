@@ -4,6 +4,7 @@ import com.compas.app.model.Publicaciones;
 import com.compas.app.model.Usuario;
 import com.compas.app.service.PublicacionesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -33,9 +34,8 @@ public class PublicacionesController {
     }
 
     //Post
-    @PostMapping("/add-publicacion/{id}")
-    public void registerNewPublicacion(@RequestBody Publicaciones publicaciones,
-                                       @PathVariable(name = "id") Usuario usuario){
+    @PostMapping(value = "/add-publicacion", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void registerNewPublicacion(@RequestBody Publicaciones publicaciones){
         publicaciones.setCreatedAt(LocalDateTime.now());
         publicaciones.setUpdatedAt(LocalDateTime.now());
         publicacionesService.addNewPublicacion(publicaciones);

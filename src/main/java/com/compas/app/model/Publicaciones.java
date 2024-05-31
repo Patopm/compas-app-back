@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "publicaciones")
-public class Publicaciones implements Serializable {
+public class Publicacion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_publicacion")
@@ -32,16 +32,17 @@ public class Publicaciones implements Serializable {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comentarios> comentarios;
+    private Set<Comentarios> comentarios;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario_id;
 
-    public Publicaciones() {
+    public Publicacion() {
     }
 
-    public Publicaciones(String titulo, String descripcion, byte[] multimedia, LocalDateTime createdAt, LocalDateTime updatedAt, List<Comentarios> comentarios, Usuario usuario_id) {
+
+    public Publicacion(String titulo, String descripcion, byte[] multimedia, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Comentarios> comentarios, Usuario usuario_id) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.multimedia = multimedia;
@@ -51,7 +52,8 @@ public class Publicaciones implements Serializable {
         this.usuario_id = usuario_id;
     }
 
-    public Publicaciones(Long idPublicacion, String titulo, String descripcion, byte[] multimedia, LocalDateTime createdAt, LocalDateTime updatedAt, List<Comentarios> comentarios, Usuario usuario_id) {
+
+    public Publicacion(Long idPublicacion, String titulo, String descripcion, byte[] multimedia, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Comentarios> comentarios, Usuario usuario_id) {
         this.idPublicacion = idPublicacion;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -110,16 +112,16 @@ public class Publicaciones implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public List<Comentarios> getComentarios() {
+    public Set<Comentarios> getComentarios() {
         return comentarios;
     }
 
-    public void setComentarios(List<Comentarios> comentarios) {
+    public void setComentarios(Set<Comentarios> comentarios) {
         this.comentarios = comentarios;
     }
 
-    public Long getUsuario_id() {
-        return usuario_id.getId_usuario();
+    public Usuario getUsuario_id() {
+        return usuario_id;
     }
 
     public void setUsuario_id(Usuario usuario_id) {
@@ -130,7 +132,7 @@ public class Publicaciones implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Publicaciones that = (Publicaciones) o;
+        Publicacion that = (Publicacion) o;
         return Objects.equals(idPublicacion, that.idPublicacion) && Objects.equals(titulo, that.titulo) && Objects.equals(descripcion, that.descripcion) && Objects.deepEquals(multimedia, that.multimedia) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(comentarios, that.comentarios) && Objects.equals(usuario_id, that.usuario_id);
     }
 
@@ -149,7 +151,7 @@ public class Publicaciones implements Serializable {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", comentarios=" + comentarios +
-                ", usuario=" + usuario_id +
+                ", usuario_id=" + usuario_id +
                 '}';
     }
 }

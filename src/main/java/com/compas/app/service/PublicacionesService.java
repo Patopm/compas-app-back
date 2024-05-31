@@ -1,9 +1,8 @@
 package com.compas.app.service;
 
 import com.compas.app.exceptions.PublicacionNotFoundException;
-import com.compas.app.model.Publicaciones;
-import com.compas.app.model.Usuario;
-import com.compas.app.repository.PublicacionesRepository;
+import com.compas.app.model.Publicacion;
+import com.compas.app.repository.PublicacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,41 +10,34 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PublicacionesService {
-    private final PublicacionesRepository publicacionesRepository;
+public class PublicacionService {
+    private final PublicacionRepository publicacionesRepository;
 
     @Autowired
-    public PublicacionesService(PublicacionesRepository publicacionesRepository) {
+    public PublicacionService(PublicacionRepository publicacionesRepository) {
         this.publicacionesRepository = publicacionesRepository;
     }
 
     //Métodos para get
-    public List<Publicaciones> getAllPublicaciones() {
+    public List<Publicacion> getAllPublicaciones() {
         return publicacionesRepository.findAll();
     }
 
-    public Publicaciones getPublicacionById(Long id){
-        return publicacionesRepository.findPubliacionById(id)
+    public Publicacion getPublicacionById(Long id){
+        return publicacionesRepository.findPublicacionById(id)
                 .orElseThrow(()-> new PublicacionNotFoundException(id));
     }
 
     //Métodos para post
-    public void addNewPublicacion(Publicaciones publicaciones){
-        Optional<Publicaciones> publicacionesOptional = publicacionesRepository.findPubliacionById(publicaciones.getUsuario_id());
+    public void addNewPublicacion(Publicacion publicaciones){
+        Optional<Publicacion> publicacionesOptional = publicacionesRepository.findPublicacionById(publicaciones.getIdPublicacion());
         if(publicacionesOptional.isPresent()){
-            throw new IllegalStateException("id " + publicaciones.getIdPublicacion() + "Ya se realizó esta publicacion");
+            throw new IllegalStateException("Publicacion con id " + publicaciones.getIdPublicacion());
         }
         publicacionesRepository.save(publicaciones);
     }
 
-    public Optional<Publicaciones> findById(Long id) {
-        return publicacionesRepository.findById(id);
-    }
-
-    public Publicaciones save(Publicaciones publicacion) {
-        return publicacionesRepository.save(publicacion);
-    }
-
+    //Método para delete
     public void deleteById(Long id) {
         publicacionesRepository.deleteById(id);
     }
