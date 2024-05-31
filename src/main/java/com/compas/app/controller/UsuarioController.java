@@ -1,6 +1,7 @@
 package com.compas.app.controller;
 
 
+import com.compas.app.exceptions.ContrasenaInvalidaException;
 import com.compas.app.exceptions.EmailNotFoundException;
 import com.compas.app.model.Usuario;
 import com.compas.app.service.UsuarioService;
@@ -9,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -48,7 +49,7 @@ public class UsuarioController {
                                                     @RequestParam(name = "password-user") String password){
         Usuario usuario = usuarioService.findUsuarioByEmailAndPassword(email, password);
         if (usuario == null){
-            throw new EmailNotFoundException(email);
+            throw new ContrasenaInvalidaException(email);
         }
         return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     }
@@ -56,8 +57,8 @@ public class UsuarioController {
     //Post
     @PostMapping("/add-usuario")
     public void registerNewUsuario(@RequestBody Usuario usuario){
-        usuario.setCreated_at(LocalDate.now());
-        usuario.setUpdated_at(LocalDate.now());
+        usuario.setCreated_at(LocalDateTime.now());
+        usuario.setUpdated_at(LocalDateTime.now());
         usuarioService.addNewUsuario(usuario);
     }
 
