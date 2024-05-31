@@ -18,7 +18,7 @@ public class Generos_musicales {
     @Column(name = "genero_musical", nullable = false, length = 50, unique = true)
     private String genero_musical;
 
-    @Column(name = "created_at", updatable = false, nullable = false, length = 50)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime created_at;
 
     @Column(name = "Updated_at", nullable = false, length = 50)

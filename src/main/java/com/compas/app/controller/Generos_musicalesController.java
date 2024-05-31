@@ -49,6 +49,7 @@ public class Generos_musicalesController {
     // POST
     @PostMapping("/addGenero-musical")
     public void addNewGenero_musical(@RequestBody Generos_musicales genero_musical) {
+
         genero_musical.setCreated_at(LocalDateTime.now());
         genero_musical.setUpdated_at(LocalDateTime.now());
         generos_musicalesService.addNewGenero_musical(genero_musical);

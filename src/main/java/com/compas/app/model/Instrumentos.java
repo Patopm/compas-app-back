@@ -18,7 +18,7 @@ public class Instrumentos {
     @Column(name = "instrumento", nullable = false, length = 50, unique = true)
     private String instrumento;
 
-    @Column(name = "created_at", updatable = false, nullable = false, length = 50)
+    @Column(name = "created_at", nullable = false, length = 50, updatable = false, insertable = false)
     private LocalDateTime created_at;
 
     @Column(name = "updated_at", nullable = false, length = 50)
@@ -40,14 +40,14 @@ public class Instrumentos {
     public Instrumentos() {
     }
 
-    public Instrumentos(String instrumento, LocalDateTime created_at, LocalDateTime updated_at, List<Artistas> artistaId) {
+    public Instrumentos(String instrumento, LocalDateTime created_at, LocalDateTime updated_at) {
         this.instrumento = instrumento;
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.artistaId = artistaId;
     }
 
-    public Instrumentos(Long id, String instrumento, LocalDateTime created_at, LocalDateTime updated_at, List<Artistas> artistaId) {
+    public Instrumentos(Long id, String instrumento, LocalDateTime created_at, LocalDateTime updated_at) {
         this.id = id;
         this.instrumento = instrumento;
         this.created_at = created_at;
