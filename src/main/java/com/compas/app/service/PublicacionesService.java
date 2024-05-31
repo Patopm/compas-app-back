@@ -1,8 +1,9 @@
 package com.compas.app.service;
 
 import com.compas.app.exceptions.PublicacionNotFoundException;
-import com.compas.app.model.Publicacion;
-import com.compas.app.repository.PublicacionRepository;
+import com.compas.app.model.Publicaciones;
+import com.compas.app.model.Usuario;
+import com.compas.app.repository.PublicacionesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,27 +11,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PublicacionService {
-    private final PublicacionRepository publicacionesRepository;
+public class PublicacionesService {
+    private final PublicacionesRepository publicacionesRepository;
 
     @Autowired
-    public PublicacionService(PublicacionRepository publicacionesRepository) {
+    public PublicacionesService(PublicacionesRepository publicacionesRepository) {
         this.publicacionesRepository = publicacionesRepository;
     }
 
     //Métodos para get
-    public List<Publicacion> getAllPublicaciones() {
+    public List<Publicaciones> getAllPublicaciones() {
         return publicacionesRepository.findAll();
     }
 
-    public Publicacion getPublicacionById(Long id){
+    public Publicaciones getPublicacionById(Long id){
         return publicacionesRepository.findPublicacionById(id)
                 .orElseThrow(()-> new PublicacionNotFoundException(id));
     }
 
     //Métodos para post
-    public void addNewPublicacion(Publicacion publicaciones){
-        Optional<Publicacion> publicacionesOptional = publicacionesRepository.findPublicacionById(publicaciones.getIdPublicacion());
+    public void addNewPublicacion(Publicaciones publicaciones){
+        Optional<Publicaciones> publicacionesOptional = publicacionesRepository.findPublicacionById(publicaciones.getIdPublicacion());
         if(publicacionesOptional.isPresent()){
             throw new IllegalStateException("Publicacion con id " + publicaciones.getIdPublicacion());
         }

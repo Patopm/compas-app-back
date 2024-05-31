@@ -1,24 +1,22 @@
 package com.compas.app.controller;
 
 import com.compas.app.model.Publicaciones;
-import com.compas.app.model.Usuario;
 import com.compas.app.service.PublicacionesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/publicacion")
 @CrossOrigin(origins="*", methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
-public class PublicacionesController {
+public class PublicacionController {
     private final PublicacionesService publicacionesService;
 
     @Autowired
-    public PublicacionesController(PublicacionesService publicacionesService) {
+    public PublicacionController(PublicacionesService publicacionesService) {
         this.publicacionesService = publicacionesService;
     }
 
