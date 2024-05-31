@@ -1,5 +1,6 @@
 package com.compas.app.service;
 
+import com.compas.app.exceptions.ContrasenaInvalidaException;
 import com.compas.app.exceptions.EmailNotFoundException;
 import com.compas.app.exceptions.UsuarioNotFoundException;
 import com.compas.app.model.Usuario;
@@ -35,6 +36,11 @@ public class UsuarioService {
     public Usuario getUsuarioByEmail(String email){
         return usuarioRepository.findUsuarioByEmail(email)
                 .orElseThrow(() -> new EmailNotFoundException(email));
+    }
+
+    public Usuario findUsuarioByEmailAndPassword(String email, String password){
+        return usuarioRepository.findUsuarioByEmailAndPassword(email, password)
+                .orElseThrow(() -> new ContrasenaInvalidaException(email));
     }
 
     // metodos para post

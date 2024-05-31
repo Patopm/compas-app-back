@@ -1,6 +1,7 @@
 package com.compas.app.controller;
 
 
+import com.compas.app.exceptions.ContrasenaInvalidaException;
 import com.compas.app.exceptions.EmailNotFoundException;
 import com.compas.app.model.Usuario;
 import com.compas.app.service.UsuarioService;
@@ -39,6 +40,16 @@ public class UsuarioController {
         Usuario usuario = usuarioService.getUsuarioByEmail(email);
         if (usuario == null){
             throw new EmailNotFoundException(email);
+        }
+        return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+    }
+
+    @GetMapping("/authenticate")
+    public ResponseEntity<Usuario> authenticateUser(@RequestParam(name = "email-user") String email,
+                                                    @RequestParam(name = "password-user") String password){
+        Usuario usuario = usuarioService.findUsuarioByEmailAndPassword(email, password);
+        if (usuario == null){
+            throw new ContrasenaInvalidaException(email);
         }
         return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     }

@@ -1,6 +1,8 @@
 package com.compas.app.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -46,7 +48,14 @@ public class Demos {
     public Demos() {
     }
 
+
+    @JsonCreator
+    public Demos(@JsonProperty Artistas artista_id) {
+        this.artista_id = artista_id;
+    }
+
     public Demos(Long id_demo, String titulo, String fecha_de_lanzamiento, String link, LocalDateTime created_at, LocalDateTime updated_at, Artistas artista_id, Long genero_musical_id) {
+
         this.id_demo = id_demo;
         this.titulo = titulo;
         this.fecha_de_lanzamiento = fecha_de_lanzamiento;
