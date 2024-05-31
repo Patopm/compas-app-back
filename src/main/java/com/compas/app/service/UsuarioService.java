@@ -8,7 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -93,6 +93,6 @@ public class UsuarioService {
         if (updateUsuario.getFoto_portada() != null && !Objects.equals(usuario.getFoto_portada(), updateUsuario.getFoto_portada())){
             usuario.setFoto_portada(updateUsuario.getFoto_portada());
         }
-        usuario.setUpdated_at(LocalDate.now());
+        usuario.setUpdated_at(LocalDateTime.now());
     }
 }

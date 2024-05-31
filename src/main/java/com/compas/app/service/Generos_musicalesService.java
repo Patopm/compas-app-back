@@ -7,7 +7,7 @@ import com.compas.app.repository.Generos_musicalesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -61,7 +61,7 @@ public class Generos_musicalesService {
        // if (upDateGenero_musical.getGenero_musical() != null && upDateGenero_musical.getGenero_musical().length() > 0 && !Objects.equals(genero_musical.getGenero_musical(), upDateGenero_musical.getGenero_musical())){
          //   genero_musical.setGenero_musical(upDateGenero_musical.getGenero_musical());
         //}
-        //genero_musical.setUpdated_at(LocalDate.now());
+        //genero_musical.setUpdated_at(LocalDateTime.now());
     //}
 
 }

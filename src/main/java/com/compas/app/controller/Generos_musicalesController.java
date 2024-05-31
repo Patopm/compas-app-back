@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -47,8 +47,8 @@ public class Generos_musicalesController {
     @PostMapping("/addGenero-musical")
     public void addNewGenero_musical(@RequestBody Generos_musicales genero_musical) {
 
-        genero_musical.setCreated_at(LocalDate.now());
-        genero_musical.setUpdated_at(LocalDate.now());
+        genero_musical.setCreated_at(LocalDateTime.now());
+        genero_musical.setUpdated_at(LocalDateTime.now());
         generos_musicalesService.addNewGenero_musical(genero_musical);
     }
 
