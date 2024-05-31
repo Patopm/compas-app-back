@@ -38,6 +38,14 @@ public class Artistas {
     )
     private List<Instrumentos> id_instrumento;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "artistas_generos_musicales",
+            joinColumns = @JoinColumn(name = "FK_ARTISTA", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "FK_GENEROMUSICAL", nullable = false)
+    )
+    private List<Generos_musicales> id_genero_musical;
+
 
 
 
