@@ -44,7 +44,7 @@ public class UsuarioController {
     }
 
     //Post
-    @PostMapping("/addUsuario")
+    @PostMapping("/add-usuario")
     public void registerNewUsuario(@RequestBody Usuario usuario){
         usuario.setCreated_at(LocalDate.now());
         usuario.setUpdated_at(LocalDate.now());
